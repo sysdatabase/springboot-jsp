@@ -1,4 +1,4 @@
-package com.hirisun.springbootjsp.services;
+package com.hirisun.springbootjsp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

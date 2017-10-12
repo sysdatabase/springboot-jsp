@@ -1,7 +1,20 @@
+server:
+  context-path: /
+  tomcat:
+    uri-encoding: utf-8
+    max-threads: 800
+  session:
+    timeout: 6000
 spring:
   mvc:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
-server:
-  port: 8080
+  profiles:
+    active: dev
+  http:
+    encoding:
+      charset: UTF-8
+  devtools:
+    restart:
+      exclude: static/**,jsp/**
