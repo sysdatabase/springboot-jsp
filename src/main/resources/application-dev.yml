@@ -8,9 +8,16 @@ spring:
     url: jdbc:mysql://localhost:3306/ssh?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jackson:
+    serialization:
+       indent_output: true
 flyway:
   baseline-on-migrate: true
 logging:
   level:
     root: info
-    com.hirisun.springbootjsp: info
+    com.hirisun.springbootjsp: debug

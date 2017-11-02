@@ -12,11 +12,11 @@ public class SchedulerService {
 
     @Scheduled(cron = "0/2 * * * * ?") // 每2秒执行一次
     public void scheduler() {
-        LOGGER.info("每2秒执行一次");
+        LOGGER.debug("每2秒执行一次");
     }
 
     @Scheduled(cron = "0/4 * * * * ?") // 每2秒执行一次
     public void scheduler1() {
-        LOGGER.info("每4秒执行一次");
+        LOGGER.debug("每4秒执行一次");
     }
 }

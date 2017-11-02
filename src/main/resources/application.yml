@@ -10,6 +10,8 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+    favicon:
+      enabled: true
   profiles:
     active: dev
   http:
