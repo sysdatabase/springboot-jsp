@@ -7,7 +7,7 @@
     <title>Login page</title>
 </head>
 <body>
-    <form action="/doLogin" method="post">
+    <form method="post">
         <table border="solid 1px">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <tr style="text-align: center">

@@ -3,7 +3,6 @@ package com.hirisun.springbootjsp.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,9 +28,4 @@ public class MainController {
 
     }
 
-    @PostMapping("/doLogin")
-    public String doLogin(){
-        LOGGER.debug("This is DoLogin Method!");
-        return "index";
-    }
 }
