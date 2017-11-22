@@ -12,7 +12,7 @@ public class User  {
     private Long id;
     private String username;
     private String password;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinTable(name = "t_user_role",joinColumns = {@JoinColumn(name = "u_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "r_id",referencedColumnName = "id")})
     private Set<Role> roles;
