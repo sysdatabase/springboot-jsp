@@ -22,6 +22,11 @@
                 <td>密  码 :</td>
                 <td><input type="password" name="password"/></td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    记住我:<input type="checkbox" name="rememberMe" />
+                </td>
+            </tr>
             <tr style="text-align: center">
                 <td colspan="2"><input type="submit" value="登录"/></td>
             </tr>
