@@ -1,6 +1,7 @@
 package com.hirisun.springbootjsp.shiro;
 
 import com.hirisun.springbootjsp.domain.User;
+import com.hirisun.springbootjsp.service.PermissionService;
 import com.hirisun.springbootjsp.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -21,6 +22,9 @@ public class AuthRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PermissionService permissionService;
 
     /**
      * 认证
@@ -50,8 +54,10 @@ public class AuthRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         User user = (User) principalCollection.getPrimaryPrincipal();
         LOGGER.debug("==> user:{}",user);
-        Set<String> permission = new LinkedHashSet<>();
-        simpleAuthorizationInfo.setStringPermissions(permission);
+        Set<String> permissionSet = new LinkedHashSet<>();
+        permissionService.getPermissionByUserId(user.getId()).forEach(permission -> permissionSet.add(permission.getName()));
+        LOGGER.debug("==> permissionSet:{}",permissionSet);
+        simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
 
