@@ -39,12 +39,14 @@ public class MainController {
 
     @PostMapping("/doLogin")
     public String doLogin(@RequestParam("username")String username,
-                          @RequestParam("password")String password,Map<String,String> map){
+                          @RequestParam("password")String password,
+                          @RequestParam( value = "rememberMe",required = false) boolean rememberMe,
+                          Map<String,String> map){
         LOGGER.debug("This is DoLogin Method!");
         LOGGER.debug("==> username:{}",username);
         LOGGER.debug("==> password:{}",password);
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password,rememberMe);
         try {
             subject.login(usernamePasswordToken);
         } catch (UnknownAccountException e){
