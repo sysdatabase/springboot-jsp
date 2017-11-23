@@ -9,5 +9,5 @@ public interface UserService {
      * @param username 用户名
      * @return 用户信息
      */
-    User getByUserName(String username);
+    User getUserByUserName(String username);
 }

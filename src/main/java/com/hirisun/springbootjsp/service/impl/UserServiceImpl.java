@@ -1,6 +1,6 @@
 package com.hirisun.springbootjsp.service.impl;
 
-import com.hirisun.springbootjsp.dao.UserRepository;
+import com.hirisun.springbootjsp.dao.UserMapper;
 import com.hirisun.springbootjsp.domain.User;
 import com.hirisun.springbootjsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper userMapper;
 
     @Override
-    public User getByUserName(String username) {
-        return userRepository.getByUsername(username);
+    public User getUserByUserName(String username) {
+        return userMapper.getByUserName(username);
     }
 }

@@ -1,20 +1,12 @@
 package com.hirisun.springbootjsp.domain;
 
-import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "t_user")
 public class User  {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String password;
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JoinTable(name = "t_user_role",joinColumns = {@JoinColumn(name = "u_id",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "r_id",referencedColumnName = "id")})
     private Set<Role> roles;
 
     public Long getId() {

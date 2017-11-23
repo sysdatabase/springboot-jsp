@@ -1,21 +1,13 @@
 package com.hirisun.springbootjsp.domain;
 
-import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "t_role")
+
 public class Role {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
-    @ManyToMany
-    @JoinTable(name = "t_role_permission",joinColumns = {@JoinColumn(name = "r_id",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "p_id",referencedColumnName = "id")})
     private Set<Permission> permissions;
 
     public long getId() {

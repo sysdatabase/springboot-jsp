@@ -1,20 +1,14 @@
 package com.hirisun.springbootjsp.domain;
 
-import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "t_permission")
 public class Permission {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String description;
     private String url;
     private long parentId;
-    @ManyToMany(mappedBy = "permissions")
     private Set<Role> roles;
 
     public long getId() {
