@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class AuthRealm extends AuthorizingRealm {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(AuthRealm.class);
@@ -22,9 +24,10 @@ public class AuthRealm extends AuthorizingRealm {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
         String username = usernamePasswordToken.getUsername();
         LOGGER.debug("==> username:{}",username);
-        User user = userService.getUserByUserName(username);
-        LOGGER.debug("==> user:{}",user);
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,user.getPassword(),getName());
+        Optional<User> user = Optional.ofNullable(userService.getUserByUserName(username));
+        user.orElseThrow(UnknownAccountException::new);
+        LOGGER.debug("==> user:{}",user.get());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.get(),user.get().getPassword(),getName());
         return authenticationInfo;
     }
     
