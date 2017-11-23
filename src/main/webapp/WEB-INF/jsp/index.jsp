@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Hello ${name}</h1>
-
+    ${cookie.JSESSIONID.value}<br>
     <a href="/logout">LogOut</a>
 </body>
 </html>
