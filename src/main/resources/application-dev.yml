@@ -16,6 +16,6 @@ flyway:
 logging:
   level:
     root: info
-    com.hirisun.springbootjsp: info
+    com.hirisun.springbootjsp: debug
 mybatis:
   type-aliases-package: com.hirisun.springbootjsp.domain
