@@ -4,13 +4,16 @@ import com.hirisun.springbootjsp.domain.User;
 import com.hirisun.springbootjsp.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public class AuthRealm extends AuthorizingRealm {
 
@@ -19,6 +22,12 @@ public class AuthRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
+    /**
+     * 认证
+     * @param authenticationToken
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
@@ -30,10 +39,20 @@ public class AuthRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.get(),user.get().getPassword(),getName());
         return authenticationInfo;
     }
-    
+
+    /**
+     * 授权
+     * @param principalCollection
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        User user = (User) principalCollection.getPrimaryPrincipal();
+        LOGGER.debug("==> user:{}",user);
+        Set<String> permission = new LinkedHashSet<>();
+        simpleAuthorizationInfo.setStringPermissions(permission);
+        return simpleAuthorizationInfo;
     }
 
 
