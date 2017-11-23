@@ -13,7 +13,7 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true,keyProperty = "id")
     int saveUser(User user);
 
-    @Delete("delete from t_user where id=#{#id}")
+    @Delete("delete from t_user where id=#{id}")
     int removeUser(Long id);
 
     @Select("select * from t_user where username=#{username}")
