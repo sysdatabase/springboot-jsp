@@ -3,10 +3,14 @@ package com.hirisun.springbootjsp.configurate;
 import com.hirisun.springbootjsp.shiro.AuthRealm;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.Cookie;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,15 +37,18 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/public/**","anon");
         filterChainDefinitionMap.put("/doLogin","anon");
         filterChainDefinitionMap.put("/logout","logout");
+        filterChainDefinitionMap.put("/index","user");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
 
     @Bean(name = "securityManager")
-    public SecurityManager securityManager(@Qualifier("authorizingRealm") AuthorizingRealm authorizingRealm){
+    public SecurityManager securityManager(@Qualifier("authorizingRealm") AuthorizingRealm authorizingRealm,
+                                           @Qualifier("rememberMeManager")RememberMeManager rememberMeManager){
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm(authorizingRealm);
+        defaultWebSecurityManager.setRememberMeManager(rememberMeManager);
         return defaultWebSecurityManager;
     }
 
@@ -58,6 +65,22 @@ public class ShiroConfig {
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
         hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
+    }
+
+    @Bean(name = "rememberMeManager")
+    public RememberMeManager rememberMeManager(@Qualifier("cookie")Cookie cookie){
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(cookie);
+        return cookieRememberMeManager;
+    }
+
+    @Bean(name = "cookie")
+    public Cookie cookie(){
+        SimpleCookie simpleCookie = new SimpleCookie();
+        simpleCookie.setName("rememberMe");
+        simpleCookie.setHttpOnly(true);
+        simpleCookie.setMaxAge(2592000);
+        return simpleCookie;
     }
 
 }
