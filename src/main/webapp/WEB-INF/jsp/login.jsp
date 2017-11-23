@@ -7,9 +7,8 @@
     <title>Login page</title>
 </head>
 <body>
-    <form method="post">
+    <form method="post" action="/doLogin">
         <table border="solid 1px">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <tr style="text-align: center">
                 <td colspan="2">用户登录</td>
             </tr>
