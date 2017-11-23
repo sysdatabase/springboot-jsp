@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,6 +10,8 @@
 <body>
     <h1>Hello ${name}</h1>
     ${cookie.JSESSIONID.value}<br>
-    <a href="/logout">LogOut</a>
+    <shiro:hasPermission name="首页">
+        <a href="/logout">LogOut</a>
+    </shiro:hasPermission>
 </body>
 </html>
