@@ -26,6 +26,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setSuccessUrl("/");
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/static/**","anon");
         filterChainDefinitionMap.put("/public/**","anon");
