@@ -1,9 +1,10 @@
 package com.hirisun.springbootjsp.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 
-public class Role {
+public class Role implements Serializable{
 
     private long id;
     private String name;

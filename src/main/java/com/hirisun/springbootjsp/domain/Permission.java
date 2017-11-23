@@ -1,8 +1,9 @@
 package com.hirisun.springbootjsp.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Permission {
+public class Permission implements Serializable{
 
     private long id;
     private String name;
