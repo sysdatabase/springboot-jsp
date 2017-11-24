@@ -39,7 +39,7 @@ public class AuthRealm extends AuthorizingRealm {
         LOGGER.debug("==> username:{}",username);
         Optional<User> user = Optional.ofNullable(userService.getUserByUserName(username));
         user.orElseThrow(UnknownAccountException::new);
-        LOGGER.debug("==> user:{}",user.get());
+        LOGGER.debug("<== user:{}",user.get());
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.get(),user.get().getPassword(),getName());
         return authenticationInfo;
     }
@@ -53,9 +53,9 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         User user = (User) principalCollection.getPrimaryPrincipal();
-        LOGGER.debug("==> user:{}",user);
+        LOGGER.debug("<== user:{}",user);
         Set<String> permissionSet = permissionService.getPermissionByUserId(user.getId()).stream().map(permission -> permission.getName()).collect(Collectors.toSet());
-        LOGGER.debug("==> permissionSet:{}",permissionSet);
+        LOGGER.debug("<== permissionSet:{}",permissionSet);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
