@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AuthRealm extends AuthorizingRealm {
 
@@ -54,8 +54,7 @@ public class AuthRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         User user = (User) principalCollection.getPrimaryPrincipal();
         LOGGER.debug("==> user:{}",user);
-        Set<String> permissionSet = new LinkedHashSet<>();
-        permissionService.getPermissionByUserId(user.getId()).forEach(permission -> permissionSet.add(permission.getName()));
+        Set<String> permissionSet = permissionService.getPermissionByUserId(user.getId()).stream().map(permission -> permission.getName()).collect(Collectors.toSet());
         LOGGER.debug("==> permissionSet:{}",permissionSet);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
