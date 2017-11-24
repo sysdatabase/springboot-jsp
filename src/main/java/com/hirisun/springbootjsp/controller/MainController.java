@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -41,7 +40,7 @@ public class MainController {
     public String doLogin(@RequestParam("username")String username,
                           @RequestParam("password")String password,
                           @RequestParam( value = "rememberMe",required = false) boolean rememberMe,
-                          Map<String,String> map){
+                          RedirectAttributes redirectAttributes){
         LOGGER.debug("This is DoLogin Method!");
         LOGGER.debug("==> username:{}",username);
         LOGGER.debug("==> password:{}",password);
@@ -50,13 +49,13 @@ public class MainController {
         try {
             subject.login(usernamePasswordToken);
         } catch (UnknownAccountException e){
-            map.put("message","账号不存在！");
+            redirectAttributes.addFlashAttribute("message","账号不存在！");
             return "redirect:login";
         } catch (IncorrectCredentialsException e){
-            map.put("message","用户名或密码错误！");
+            redirectAttributes.addFlashAttribute("message","用户名或密码错误！");
             return "redirect:login";
         } catch (Exception e){
-            map.put("message","其他错误！");
+            redirectAttributes.addFlashAttribute("message","其他错误！");
             return "redirect:login";
         }
         return "redirect:index";
