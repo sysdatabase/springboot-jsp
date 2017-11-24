@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -29,6 +29,9 @@
             </tr>
             <tr style="text-align: center">
                 <td colspan="2"><input type="submit" value="登录"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">${message}</td>
             </tr>
         </table>
     </form>
