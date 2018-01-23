@@ -11,7 +11,7 @@
     <h1>Hello ${name}</h1>
     ${cookie.JSESSIONID.value}<br>
     <shiro:hasPermission name="首页">
-        <a href="/logout">LogOut</a>
+        <a href="${pageContext.request.contextPath}/logout">LogOut</a>
     </shiro:hasPermission>
 </body>
 </html>

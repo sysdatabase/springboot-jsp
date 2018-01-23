@@ -7,7 +7,7 @@
     <title>Login page</title>
 </head>
 <body>
-    <form method="post" action="/doLogin">
+    <form method="post" action="${pageContext.request.contextPath}/doLogin">
         <table border="solid 1px">
             <tr style="text-align: center">
                 <td colspan="2">用户登录</td>
